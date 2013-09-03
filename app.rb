@@ -1,4 +1,4 @@
-require 'sinatra/base'
+require 'sinatra'
 require 'sinatra/activerecord'
 #require 'sinatra/flash'
 require 'sinatra/contrib/all'
@@ -53,3 +53,5 @@ class PrivateReader < Sinatra::Base
     'hello'
   end
 end
+
+require_relative 'app/controllers/feeds_controller'

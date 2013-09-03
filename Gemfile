@@ -12,3 +12,5 @@ gem 'sinatra-assetpack'
 
 gem 'rspec', groups: [:development, :test]
 gem 'rake'
+gem 'feedbag'
+gem 'feedzirra'
