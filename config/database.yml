@@ -1,0 +1,21 @@
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: <%= ENV['PRIVATE_READER_DATABASE'] || "private_reader" %>
+  username: <%= ENV['PRIVATE_READER_DATABASE_USERNAME'] %>
+  password: <%= ENV['PRIVATE_READER_DATABASE_PASSWORD'] %>
+  host: <%= ENV['PRIVATE_READER_DATABASE_HOST'] %>
+  port: <%= ENV['PRIVATE_READER_DATABASE_PORT'] %>
