@@ -14,3 +14,7 @@ gem 'rspec', groups: [:development, :test]
 gem 'rake'
 gem 'feedbag'
 gem 'feedzirra'
+
+group :test do
+  gem 'database_cleaner'
+end

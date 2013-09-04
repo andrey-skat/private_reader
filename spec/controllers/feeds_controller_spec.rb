@@ -8,9 +8,16 @@ describe 'FeedsController' do
 
     let(:url) { 'http://example.com/' }
 
-    it 'should add a feed' do
+    it 'add a feed' do
+      feed = {
+          'name' => 'name_1',
+          'url'=> url
+      }
+      expect(FeedDiscovery).to receive(:feed_data).with(url).and_return(feed)
+
       post '/feeds', url: url
 
+      expect(Feed.first.attributes).to include feed
       expect(last_response.status).to eq 302
     end
   end

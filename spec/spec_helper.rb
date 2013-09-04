@@ -2,6 +2,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'rspec'
 require 'rack/test'
+require 'database_cleaner'
 
 require './app'
 
@@ -12,6 +13,19 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.include Rack::Test::Methods
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
 
 def app
