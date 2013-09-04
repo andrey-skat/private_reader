@@ -9,6 +9,6 @@ class FeedDiscovery
         url: feed.feed_url || url
     }
   rescue
-    nil
+    raise 'Error in load and parse feed'
   end
 end
