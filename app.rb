@@ -1,20 +1,17 @@
-require 'sinatra'
-require 'sinatra/activerecord'
-#require 'sinatra/flash'
-require 'sinatra/contrib/all'
-require 'sinatra/assetpack'
-#require 'json'
-#require 'i18n'
-#require 'will_paginate'
-#require 'will_paginate/active_record'
+require 'rubygems'
+require 'bundler'
+Bundler.require(:default)
 
 #I18n.load_path += Dir[File.join(File.dirname(__FILE__), 'config/locales', '*.yml').to_s]
-ActiveRecord::Base.logger = nil
 
 class PrivateReader < Sinatra::Base
   configure do
+    register Sinatra::ActiveRecordExtension
+    register Sinatra::Contrib
+    register Sinatra::AssetPack
+
     set :database_file, 'config/database.yml'
-    #set :views, 'app/views'
+    set :views, 'app/views'
     set :public_dir, 'public'
     set :root, File.dirname(__FILE__)
 
@@ -22,12 +19,13 @@ class PrivateReader < Sinatra::Base
     #set :session_secret, ENV['SECRET_TOKEN'] || 'secret!'
     enable :logging
 
-    register Sinatra::ActiveRecordExtension
-    #register Sinatra::Flash
-    register Sinatra::Contrib
-    register Sinatra::AssetPack
-
-    ActiveRecord::Base.include_root_in_json = false
+    #ActiveRecord::Base.include_root_in_json = false
+    ActiveRecord::Base.logger = nil
+    Rabl.register!
+    Rabl.configure do |config|
+      config.view_paths = [settings.views]
+      config.include_json_root = false
+    end
   end
 
   assets do
