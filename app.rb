@@ -9,6 +9,7 @@ require 'sinatra/assetpack'
 #require 'will_paginate/active_record'
 
 #I18n.load_path += Dir[File.join(File.dirname(__FILE__), 'config/locales', '*.yml').to_s]
+ActiveRecord::Base.logger = nil
 
 class PrivateReader < Sinatra::Base
   configure do
@@ -19,7 +20,7 @@ class PrivateReader < Sinatra::Base
 
     #enable :sessions
     #set :session_secret, ENV['SECRET_TOKEN'] || 'secret!'
-    #enable :logging
+    enable :logging
 
     register Sinatra::ActiveRecordExtension
     #register Sinatra::Flash

@@ -2,6 +2,8 @@
 require 'feedzirra'
 
 class FeedDiscovery
+  class DiscoveryError < StandardError; end
+
   def self.feed_data(url)
     feed = Feedzirra::Feed.fetch_and_parse url, user_agent: 'PrivateReader'
     {
@@ -9,6 +11,6 @@ class FeedDiscovery
         url: feed.feed_url || url
     }
   rescue
-    raise 'Error in load and parse feed'
+    raise DiscoveryError
   end
 end

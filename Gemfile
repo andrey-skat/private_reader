@@ -15,6 +15,10 @@ gem 'rake'
 gem 'feedbag'
 gem 'feedzirra'
 
+group :development do
+  gem 'shotgun'
+end
+
 group :test do
   gem 'database_cleaner'
 end
