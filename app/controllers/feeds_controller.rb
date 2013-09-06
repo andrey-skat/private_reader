@@ -4,7 +4,7 @@ require_relative '../../lib/feed_discovery'
 class PrivateReader < Sinatra::Base
 
   get '/feeds' do
-    [404]
+    Rabl.render Feed.all, 'feeds/list'
   end
 
   get '/feeds/:id' do

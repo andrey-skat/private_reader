@@ -4,8 +4,19 @@ require_relative '../../app/controllers/feeds_controller'
 
 describe 'FeedsController' do
 
-  describe 'GET /feeds/:id' do
+  describe 'GET /feeds' do
+    it 'shows all feeds' do
+      FactoryGirl.create_list(:feed, 3)
 
+      get '/feeds'
+
+      feeds = JSON.parse(last_response.body)
+      expect(feeds.count).to eq 3
+      expect(feeds[0]['name']).to eq 'name_1'
+    end
+  end
+
+  describe 'GET /feeds/:id' do
     it 'shows feed data' do
       FactoryGirl.create(:feed)
 
@@ -14,7 +25,6 @@ describe 'FeedsController' do
       expect(JSON.parse(last_response.body)).to include 'name'
       expect(JSON.parse(last_response.body)['name']).to eq 'name_1'
     end
-
   end
 
   describe 'POST /feeds' do
