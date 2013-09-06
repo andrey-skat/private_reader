@@ -5,6 +5,11 @@ Bundler.require(:default)
 #I18n.load_path += Dir[File.join(File.dirname(__FILE__), 'config/locales', '*.yml').to_s]
 
 class PrivateReader < Sinatra::Base
+  before do
+    #content type for all responses is json
+    content_type :json
+  end
+
   configure do
     register Sinatra::ActiveRecordExtension
     register Sinatra::Contrib
