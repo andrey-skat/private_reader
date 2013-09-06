@@ -3,8 +3,15 @@ ENV['RACK_ENV'] = 'test'
 require 'rspec'
 require 'rack/test'
 require 'database_cleaner'
+require 'factory_girl'
 
 require './app'
+
+def app
+  PrivateReader
+end
+
+Dir[app.settings.root + '/spec/factories/**/*.rb'].each {|f| require f}
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -26,8 +33,4 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-end
-
-def app
-  PrivateReader
 end

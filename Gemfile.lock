@@ -23,6 +23,8 @@ GEM
     curb (0.8.4)
     database_cleaner (1.0.1)
     diff-lcs (1.2.4)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
     feedbag (0.9.1)
       hpricot (>= 0.6)
     feedzirra (0.0.24)
@@ -95,6 +97,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   database_cleaner
+  factory_girl
   feedbag
   feedzirra
   rabl

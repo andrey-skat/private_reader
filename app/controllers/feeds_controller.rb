@@ -3,6 +3,15 @@ require_relative '../../lib/feed_discovery'
 
 class PrivateReader < Sinatra::Base
 
+  get '/feeds' do
+    [404]
+  end
+
+  get '/feeds/:id' do
+    feed = Feed.find(params[:id])
+    Rabl.render feed, 'feeds/show'
+  end
+
   post '/feeds' do
     begin
       feed_data = FeedDiscovery.feed_data params[:url]

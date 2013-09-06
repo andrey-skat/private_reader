@@ -4,6 +4,19 @@ require_relative '../../app/controllers/feeds_controller'
 
 describe 'FeedsController' do
 
+  describe 'GET /feeds/:id' do
+
+    it 'shows feed data' do
+      FactoryGirl.create(:feed)
+
+      get '/feeds/1'
+
+      expect(JSON.parse(last_response.body)).to include 'name'
+      expect(JSON.parse(last_response.body)['name']).to eq 'name_1'
+    end
+
+  end
+
   describe 'POST /feeds' do
 
     let(:url) { 'http://example.com/' }

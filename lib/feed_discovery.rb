@@ -1,6 +1,3 @@
-#require 'feedbag'
-require 'feedzirra'
-
 class FeedDiscovery
   class DiscoveryError < StandardError; end
 
