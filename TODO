@@ -1,0 +1,4 @@
+* Protect parameters (maybe strong_parameters?)
+* Mongo [?]
+* Do something with 'require_relative' (autoload all files at start?)
+* Paginate
