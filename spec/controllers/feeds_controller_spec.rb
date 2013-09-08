@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require_relative '../../app/controllers/feeds_controller'
-
 describe 'FeedsController' do
 
   describe 'GET /feeds' do

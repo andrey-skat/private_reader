@@ -59,3 +59,4 @@ class PrivateReader < Sinatra::Base
 end
 
 require_relative 'app/controllers/feeds_controller'
+require_relative 'app/controllers/articles_controller'
