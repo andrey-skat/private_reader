@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :article do
+    feed
+
     sequence(:title) { |n| "title_#{n}" }
     sequence(:datetime) { |n| Date.today + (n-1).day }
     sequence(:body) { |n| "body_#{n}" }

@@ -14,6 +14,19 @@ describe 'ArticlesController' do
     end
   end
 
+  describe 'GET /feeds/:feed_id/articles' do
+    it 'shows all articles for feed' do
+      FactoryGirl.create(:article, id: 1)
+      FactoryGirl.create(:article, id: 2)
+
+      get '/feeds/2/articles'
+
+      articles = JSON.parse(last_response.body)
+      expect(articles.count).to eq 1
+      expect(articles[0]['feed_id']).to eq 2
+    end
+  end
+
   describe 'GET /articles/:id' do
     it 'shows article data' do
       FactoryGirl.create(:article)
