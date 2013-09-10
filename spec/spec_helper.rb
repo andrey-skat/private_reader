@@ -5,6 +5,9 @@ require 'rack/test'
 require 'database_cleaner'
 require 'factory_girl'
 
+require 'coveralls'
+Coveralls.wear!
+
 require './app'
 
 def app
