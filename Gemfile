@@ -21,6 +21,7 @@ gem 'rspec', groups: [:development, :test]
 
 group :development do
   gem 'shotgun'
+  gem 'guard-rspec'
 end
 
 group :test do
