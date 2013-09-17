@@ -19,11 +19,11 @@ describe 'ArticlesController' do
       FactoryGirl.create(:article, id: 1)
       FactoryGirl.create(:article, id: 2)
 
-      get '/feeds/2/articles'
+      get '/channels/2/articles'
 
       articles = JSON.parse(last_response.body)
       expect(articles.count).to eq 1
-      expect(articles[0]['feed_id']).to eq 2
+      expect(articles[0]['channel_id']).to eq 2
     end
   end
 

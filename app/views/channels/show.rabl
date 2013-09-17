@@ -1,2 +1,2 @@
-object @feed
+object @channel
 attributes :id, :name, :url

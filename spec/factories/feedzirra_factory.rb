@@ -29,7 +29,7 @@ class FeedzirraFeedFactory < FeedzirraFactory
         title: "title_#{sequence_number}",
         feed_url: "http://example#{sequence_number}.com/",
         etag: "etag_#{sequence_number}",
-        last_modified: Date.today - (sequence_number-1).day,
+        last_modified: Time.new.getutc - (sequence_number-1).day,
         entries: FeedzirraArticleFactory.build_list(3)
     )
   end
@@ -44,7 +44,7 @@ class FeedzirraArticleFactory < FeedzirraFactory
         author: '',
         summary: "summary_#{sequence_number}",
         content: '',
-        published: Date.today - (sequence_number-1).day,
+        published: Time.new.getutc - (sequence_number-1).day,
         categories: []
     )
   end

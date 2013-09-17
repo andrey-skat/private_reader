@@ -4,15 +4,21 @@ require_relative '../../lib/feed_discovery'
 describe FeedDiscovery do
 
   let (:url) { 'http://example.com/' }
-  let (:feed) { double(title: 'name_1', feed_url: url) }
 
-  it 'get feed title' do
+  it 'gets channel title' do
+    feed = double(title: 'name_1', feed_url: url, last_modified: Time.new.getutc)
     expect(Feedzirra::Feed).to receive(:fetch_and_parse).and_return(feed)
     result = FeedDiscovery.feed_data(url)
+
     expect(result).to eq({
-      name: 'name_1',
-      url: url
+      name: feed.title,
+      url: feed.feed_url,
+      last_modified: feed.last_modified
     })
+  end
+
+  xit 'calculates last_modified date by entries if not present in feed' do
+    feed = double(title: 'name_1', feed_url: url)
   end
 
   it 'raise error if feed not found' do

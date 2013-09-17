@@ -1,8 +1,8 @@
 #TODO: add entry_id
 
 class Article < ActiveRecord::Base
-  belongs_to :feed
-  validates :feed_id, presence: true
+  belongs_to :channel
+  validates :channel_id, presence: true
 
   def self.add(data)
     create!(

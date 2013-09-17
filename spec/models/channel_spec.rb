@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-require_relative '../../app/models/feed'
+require_relative '../../app/models/channel'
 
-describe Feed do
+describe Channel do
   it 'saves feed updates' do
     expect(Article).to receive(:add).once
 

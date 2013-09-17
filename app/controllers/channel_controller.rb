@@ -1,22 +1,22 @@
-require_relative '../models/feed'
+require_relative '../models/channel'
 require_relative '../../lib/feed_discovery'
 
 class PrivateReader < Sinatra::Base
 
-  get '/feeds' do
-    Rabl.render Feed.all, 'feeds/list'
+  get '/channels' do
+    Rabl.render Channel.all, 'channels/list'
   end
 
-  get '/feeds/:id' do
-    feed = Feed.find(params[:id])
-    Rabl.render feed, 'feeds/show'
+  get '/channels/:id' do
+    feed = Channel.find(params[:id])
+    Rabl.render feed, 'channels/show'
   end
 
-  post '/feeds' do
+  post '/channels' do
     begin
       feed_data = FeedDiscovery.feed_data params[:url]
-      feed = Feed.create!(feed_data)
-      redirect to "/feeds/#{feed.id}"
+      feed = Channel.create!(feed_data)
+      redirect to "/channels/#{feed.id}"
     rescue FeedDiscovery::DiscoveryError
       { error: 'Feed not exist or not valid.' }.to_json
     rescue => e

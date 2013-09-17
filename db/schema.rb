@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910042539) do
+ActiveRecord::Schema.define(version: 20130917051840) do
 
   create_table "articles", force: true do |t|
-    t.integer  "feed_id"
+    t.integer  "channel_id"
     t.string   "title"
     t.datetime "published"
     t.string   "url"
@@ -22,11 +22,12 @@ ActiveRecord::Schema.define(version: 20130910042539) do
     t.datetime "updated_at"
   end
 
-  create_table "feeds", force: true do |t|
+  create_table "channels", force: true do |t|
     t.string   "name"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_updated"
   end
 
 end

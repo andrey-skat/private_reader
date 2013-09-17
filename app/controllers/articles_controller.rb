@@ -11,8 +11,8 @@ class PrivateReader < Sinatra::Base
     Rabl.render article, 'articles/show'
   end
 
-  get '/feeds/:feed_id/articles' do
-    articles = Article.where(feed_id: params[:feed_id])
+  get '/channels/:channel_id/articles' do
+    articles = Article.where(channel_id: params[:channel_id])
     Rabl.render articles, 'articles/list'
   end
 

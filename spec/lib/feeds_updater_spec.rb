@@ -5,7 +5,7 @@ require_relative '../../lib/feeds_updater'
 describe FeedsUpdater do
 
   before do
-    FactoryGirl.create_list(:feed, 3)
+    FactoryGirl.create_list(:channel, 3)
 
     #builds 3 feeds with 3 articles each
     feedzirra_feeds = FeedzirraFeedFactory.build_list(3)
@@ -14,7 +14,7 @@ describe FeedsUpdater do
 
   describe '.update_all' do
 
-    it 'downloads new articles for feeds' do
+    it 'downloads new articles for channels' do
       expect(Feedzirra::Feed).to receive(:fetch_and_parse).exactly(3).times
 
       FeedsUpdater.update_all
@@ -26,8 +26,16 @@ describe FeedsUpdater do
       expect(Article.count).to eq 9 # 3 feeds with 3 articles each
     end
 
-    context 'nothing donwloaded' do
-      it 'doesnt crash'
+    xit 'saves last feed update time' do
+      feedzirra_feed = FeedzirraFeedFactory.build
+      Feedzirra::Feed.stub(:fetch_and_parse).and_return([feedzirra_feed])
+      FeedsUpdater.update_all
+
+      expect(Channel.first.last_updated).to eq Time.new.getutc
+    end
+
+    context 'nothing downloaded' do
+
     end
   end
 
