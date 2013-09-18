@@ -37,12 +37,12 @@ describe 'ChannelsController' do
 
     let(:url) { 'http://example.com/' }
 
-    it 'adda a channel' do
+    it 'adds a channel' do
       channel = {
-          'name' => 'name_1',
-          'url' => url
+          name: 'name_1',
+          url: url
       }
-      expect(FeedDiscovery).to receive(:feed_data).with(url).and_return(channel)
+      expect(FeedFetcher).to receive(:discover).with(url).and_return(channel)
 
       post '/channels', url: url
 
@@ -53,7 +53,7 @@ describe 'ChannelsController' do
     end
 
     it 'returns error message if cant create record' do
-      expect(FeedDiscovery).to receive(:feed_data).and_return(nil)
+      expect(FeedFetcher).to receive(:discover).and_return(nil)
 
       post '/channels', url: url
 

@@ -5,11 +5,6 @@ class Article < ActiveRecord::Base
   validates :channel_id, presence: true
 
   def self.add(data)
-    create!(
-        title: data.title,
-        url: data.url,
-        body: data.summary,
-        published: Date.today
-    )
+    create!(data)
   end
 end

@@ -1,5 +1,5 @@
 require_relative '../models/channel'
-require_relative '../../lib/feed_discovery'
+require_relative '../../lib/feed_fetcher'
 
 class PrivateReader < Sinatra::Base
 
@@ -14,10 +14,10 @@ class PrivateReader < Sinatra::Base
 
   post '/channels' do
     begin
-      feed_data = FeedDiscovery.feed_data params[:url]
+      feed_data = FeedFetcher.discover params[:url]
       feed = Channel.create!(feed_data)
       redirect to "/channels/#{feed.id}"
-    rescue FeedDiscovery::DiscoveryError
+    rescue FeedFetcher::DiscoveryError
       { error: 'Feed not exist or not valid.' }.to_json
     rescue => e
       { error: "Can't add feed. #{e.message}" }.to_json

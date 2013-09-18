@@ -1,41 +1,20 @@
 require 'ostruct'
+require_relative 'factory'
 
-class FeedzirraFactory
-  class << self
-    def build_list(count)
-      result = []
-      count.times do
-        result << build
-      end
-      result
-    end
-
-    def sequence_number
-      @sequence_number ||= 0
-      @sequence_number += 1
-    end
-
-    def build
-      sequence_number
-      create_fake
-    end
-  end
-end
-
-class FeedzirraFeedFactory < FeedzirraFactory
+class FeedzirraFeedFactory < Factory
   private
   def self.create_fake
     OpenStruct.new(
         title: "title_#{sequence_number}",
         feed_url: "http://example#{sequence_number}.com/",
         etag: "etag_#{sequence_number}",
-        last_modified: Time.new.getutc - (sequence_number-1).day,
-        entries: FeedzirraArticleFactory.build_list(3)
+        last_modified: Time.now.utc - (sequence_number-1).day,
+        entries: FeedzirraEntryFactory.build_list(3)
     )
   end
 end
 
-class FeedzirraArticleFactory < FeedzirraFactory
+class FeedzirraEntryFactory < Factory
   private
   def self.create_fake
     OpenStruct.new(
@@ -44,7 +23,7 @@ class FeedzirraArticleFactory < FeedzirraFactory
         author: '',
         summary: "summary_#{sequence_number}",
         content: '',
-        published: Time.new.getutc - (sequence_number-1).day,
+        published: Time.now.utc - (sequence_number-1).day,
         categories: []
     )
   end

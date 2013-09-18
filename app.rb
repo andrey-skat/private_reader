@@ -33,6 +33,7 @@ class PrivateReader < Sinatra::Base
     end
   end
 
+=begin
   assets do
     serve '/js',     from: 'public/js'
     serve '/css',    from: 'public/css'
@@ -52,6 +53,7 @@ class PrivateReader < Sinatra::Base
 
     prebuild true unless ENV['RACK_ENV'] == 'test'
   end
+=end
 
   get '/' do
     'hello'
