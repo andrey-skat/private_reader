@@ -12,7 +12,7 @@ class PrivateReader < Sinatra::Base
   end
 
   get '/channels/:channel_id/articles' do
-    articles = Article.where(channel_id: params[:channel_id])
+    articles = Article.where(channel_id: params[:channel_id]).order(published: :desc)
     Rabl.render articles, 'articles/list'
   end
 

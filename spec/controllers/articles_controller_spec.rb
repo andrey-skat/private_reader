@@ -14,7 +14,7 @@ describe 'ArticlesController' do
     end
   end
 
-  describe 'GET /feeds/:feed_id/articles' do
+  describe 'GET /channels/:channel_id/articles' do
     it 'shows all articles for feed' do
       FactoryGirl.create(:article, id: 1)
       FactoryGirl.create(:article, id: 2)

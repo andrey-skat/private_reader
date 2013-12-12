@@ -1,2 +1,2 @@
 object @article
-attributes :id, :title, :url, :datetime, :body, :channel_id
+attributes :id, :title, :url, :published, :body, :channel_id

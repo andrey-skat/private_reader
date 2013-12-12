@@ -15,6 +15,7 @@ class PrivateReader < Sinatra::Base
   post '/channels' do
     begin
       feed_data = FeedFetcher.discover params[:url]
+      feed_data.delete(:entries)
       feed = Channel.create!(feed_data)
       redirect to "/channels/#{feed.id}"
     rescue FeedFetcher::DiscoveryError

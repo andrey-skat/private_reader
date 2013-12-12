@@ -3,7 +3,6 @@ require 'bundler'
 Bundler.require(:default)
 
 #I18n.load_path += Dir[File.join(File.dirname(__FILE__), 'config/locales', '*.yml').to_s]
-
 class PrivateReader < Sinatra::Base
   before do
     #content type for all responses is json
@@ -11,14 +10,16 @@ class PrivateReader < Sinatra::Base
   end
 
   configure do
+	  register Sinatra::AssetPack
     register Sinatra::ActiveRecordExtension
-    register Sinatra::Contrib
-    register Sinatra::AssetPack
+    register Sinatra::Contrib    
 
     set :database_file, 'config/database.yml'
     set :views, 'app/views'
     set :public_dir, 'public'
     set :root, File.dirname(__FILE__)
+
+    #set :sass, load_paths: %W(#{settings.root}/public/css/)
 
     #enable :sessions
     #set :session_secret, ENV['SECRET_TOKEN'] || 'secret!'
@@ -33,31 +34,34 @@ class PrivateReader < Sinatra::Base
     end
   end
 
-=begin
   assets do
     serve '/js',     from: 'public/js'
     serve '/css',    from: 'public/css'
     serve '/images', from: 'public/images'
 
     js :application, '/js/application.js', %w(
-        /js/jquery-min.js,
-        /js/bootstrap-min.js
+        /js/libs/*.js
+        /js/*.js
     )
 
-    css :application, '/css/application.css', %w(
-        /css/bootstrap-min.css
-    )
+    #css :application, '/css/application.css', %w(
+    #   /css/main.sass
+    #)
 
     js_compression  :jsmin
-    css_compression :simple
+    css_compression :sass
 
-    prebuild true unless ENV['RACK_ENV'] == 'test'
+    #prebuild true unless ENV['RACK_ENV'] == 'test'
   end
-=end
 
   get '/' do
-    'hello'
+    redirect '/index.html'
   end
+
+	get '/css/application.css' do
+		content_type :css
+		Sass.compile_file('public/css/main.sass')
+	end
 end
 
 require_relative 'app/controllers/channel_controller'

@@ -40,7 +40,9 @@ describe 'ChannelsController' do
     it 'adds a channel' do
       channel = {
           name: 'name_1',
-          url: url
+          url: url,
+          last_updated: Date.today,
+		      entries: []
       }
       expect(FeedFetcher).to receive(:discover).with(url).and_return(channel)
 
