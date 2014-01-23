@@ -12,3 +12,8 @@ desc "Update all feeds"
 task :update_all_feeds do
   FeedsUpdater.update_all
 end
+
+desc "Subscribe to feed"
+task :subscribe, :url do |url|
+	Channel.subscribe url
+end

@@ -15,7 +15,7 @@ describe FeedFetcher do
     end
 
     it 'raise error if feed not found' do
-      expect { described_class.discover(url) }.to raise_error
+      expect { described_class.discover(url) }.to raise_error(FeedFetcher::DiscoveryError, 'Feed not exist or not valid.')
     end
 
   end

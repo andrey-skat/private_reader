@@ -8,7 +8,7 @@ class FeedFetcher
     def discover(url)
       fetch(url)
     rescue
-      raise DiscoveryError
+      raise DiscoveryError, 'Feed not exist or not valid.'
     end
 
     def fetch(url)

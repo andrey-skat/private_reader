@@ -12,14 +12,14 @@ class PrivateReader < Sinatra::Base
     Rabl.render feed, 'channels/show'
   end
 
+  post '/channels/update' do
+	  {}
+  end
+
   post '/channels' do
     begin
-      feed_data = FeedFetcher.discover params[:url]
-      feed_data.delete(:entries)
-      feed = Channel.create!(feed_data)
+			feed = Channel.subscribe params[:url]
       redirect to "/channels/#{feed.id}"
-    rescue FeedFetcher::DiscoveryError
-      { error: 'Feed not exist or not valid.' }.to_json
     rescue => e
       { error: "Can't add feed. #{e.message}" }.to_json
     end
