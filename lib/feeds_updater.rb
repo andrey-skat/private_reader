@@ -19,8 +19,8 @@ class FeedsUpdater
 		until queue.empty?
 			channel, feed = queue.pop
 			channel.add_new_articles(feed[:entries])
-			#channel.last_updated = feed[:last_modified]
-			#channel.save
+			channel.last_updated = feed[:last_updated]
+			channel.save
 		end
   end
 

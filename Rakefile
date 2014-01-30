@@ -8,6 +8,10 @@ require './app'
 
 require_relative 'lib/feeds_updater'
 
+task :default do
+	puts 'default'
+end
+
 desc "Update all feeds"
 task :update_all_feeds do
   FeedsUpdater.update_all

@@ -26,6 +26,9 @@ class PrivateReader < Sinatra::Base
     #set :session_secret, ENV['SECRET_TOKEN'] || 'secret!'
     enable :logging
 
+	  #ActiveSupport::TimeWithZone = :local
+	  ActiveRecord::Base.default_timezone = :local
+
     #ActiveRecord::Base.include_root_in_json = false
     ActiveRecord::Base.logger = nil
     Rabl.register!
