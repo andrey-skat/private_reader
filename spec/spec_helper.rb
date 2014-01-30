@@ -15,6 +15,7 @@ def app
 end
 
 Dir[app.settings.root + '/spec/factories/**/*.rb'].each {|f| require f}
+ActiveRecord::Base.default_timezone = :utc
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|

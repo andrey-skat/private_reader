@@ -7,7 +7,7 @@ class FeedFactory < Factory
 				name: "name_#{sequence_number}",
 				url: "http://example#{sequence_number}.com/",
 				etag: "etag_#{sequence_number}",
-				last_updated: Time.now.utc - (sequence_number-1).day,
+				last_updated: Time.now.utc + (sequence_number-1).day,
 				entries: FeedEntryFactory.build_list(1)
 		}
 	end
@@ -20,7 +20,7 @@ class FeedEntryFactory < Factory
 				title: "title_#{sequence_number}",
 				url: "http://example#{sequence_number}.com",
 				body: "body_#{sequence_number}",
-				published: Time.now.utc - (sequence_number-1).day,
+				published: Time.now.utc + (sequence_number-1).day,
 		}
 	end
 end

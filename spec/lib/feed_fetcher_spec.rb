@@ -26,7 +26,7 @@ describe FeedFetcher do
       feed = double(
           title: 'name_1',
           feed_url: url,
-          last_modified: Time.now,
+          last_modified: Time.now.utc,
           entries: []
       )
       expect(Feedzirra::Feed).to receive(:fetch_and_parse).and_return(feed)
@@ -63,11 +63,12 @@ describe FeedFetcher do
             last_modified: nil,
             entries: []
         )
-        Time.stub(:now).and_return(Time.now)
+        default_time = Time.now.utc
+        allow(Time).to receive(:now).and_return(default_time)
         expect(Feedzirra::Feed).to receive(:fetch_and_parse).and_return(feed)
         result = described_class.fetch(url)
 
-        expect(result[:last_updated]).to eq Time.now
+        expect(result[:last_updated]).to eq default_time
       end
 
     end

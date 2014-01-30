@@ -28,7 +28,7 @@ describe FeedsUpdater do
 
     it 'saves last feed update time' do
 	    feed = FeedFactory.build
-	    feed[:last_updated] = Time.now
+	    feed[:last_updated] = Time.now.utc
 	    allow(FeedFetcher).to receive(:fetch).and_return(feed)
 
 	    #expect(Channel.first.last_updated.strftime("%Y-%m-%d %H:%M")).not_to eq feed[:last_updated].strftime("%Y-%m-%d %H:%M")

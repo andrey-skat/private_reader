@@ -8,7 +8,7 @@ class FeedzirraFeedFactory < Factory
         title: "title_#{sequence_number}",
         feed_url: "http://example#{sequence_number}.com/",
         etag: "etag_#{sequence_number}",
-        last_modified: Time.now.utc - (sequence_number-1).day,
+        last_modified: Time.now.utc + (sequence_number-1).day,
         entries: FeedzirraEntryFactory.build_list(3)
     )
   end
@@ -23,7 +23,7 @@ class FeedzirraEntryFactory < Factory
         author: '',
         summary: "summary_#{sequence_number}",
         content: '',
-        published: Time.now.utc - (sequence_number-1).day,
+        published: Time.now.utc + (sequence_number-1).day,
         categories: []
     )
   end
