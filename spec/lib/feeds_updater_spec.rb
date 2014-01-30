@@ -7,7 +7,7 @@ describe FeedsUpdater do
   before do
     FactoryGirl.create_list(:channel, 3)
 
-    #builds 1 feed with 3 articles each
+    #builds 1 feed with 1 article
     feed = FeedFactory.build
     FeedFetcher.stub(:fetch).and_return(feed)
   end
@@ -23,7 +23,7 @@ describe FeedsUpdater do
     it 'saves downloaded articles' do
       expect(Article.count).to eq 0
       FeedsUpdater.update_all
-      expect(Article.count).to eq 9 # 3 feeds with 3 articles each
+      expect(Article.count).to eq 3 # 1 feed with 3 articles
     end
 
     xit 'saves last feed update time' do

@@ -8,7 +8,7 @@ class FeedFactory < Factory
 				url: "http://example#{sequence_number}.com/",
 				etag: "etag_#{sequence_number}",
 				last_updated: Time.now.utc - (sequence_number-1).day,
-				entries: FeedEntryFactory.build_list(3)
+				entries: FeedEntryFactory.build_list(1)
 		}
 	end
 end

@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'bundler'
+require 'active_support/time_with_zone'
 Bundler.require(:default)
 
 #I18n.load_path += Dir[File.join(File.dirname(__FILE__), 'config/locales', '*.yml').to_s]
@@ -37,7 +38,7 @@ class PrivateReader < Sinatra::Base
   assets do
     serve '/js',     from: 'public/js'
     serve '/css',    from: 'public/css'
-    serve '/images', from: 'public/images'
+    #serve '/images', from: 'public/images'
 
     js :application, '/js/application.js', %w(
         /js/libs/*.js
