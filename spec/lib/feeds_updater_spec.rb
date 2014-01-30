@@ -7,7 +7,7 @@ describe FeedsUpdater do
   before do
     FactoryGirl.create_list(:channel, 3)
 
-    #builds 3 feed with 1 article
+    #builds 1 feed with 3 articles each
     feed = FeedFactory.build
     allow(FeedFetcher).to receive(:fetch).and_return(feed)
   end
@@ -23,18 +23,17 @@ describe FeedsUpdater do
     it 'saves downloaded articles' do
       expect(Article.count).to eq 0
       FeedsUpdater.update_all
-      expect(Article.count).to eq 3 # 3 feed with 1 article each
+      expect(Article.count).to eq 3 # 1 feeds with 3 articles each
     end
 
     it 'saves last feed update time' do
-	    feed = FeedFactory.build
-	    feed[:last_updated] = Time.now.utc
-	    allow(FeedFetcher).to receive(:fetch).and_return(feed)
+      feed = FeedFactory.build
+      feed[:last_updated] = Time.now.utc + 1.day
+      allow(FeedFetcher).to receive(:fetch).and_return(feed)
 
-	    #expect(Channel.first.last_updated.strftime("%Y-%m-%d %H:%M")).not_to eq feed[:last_updated].strftime("%Y-%m-%d %H:%M")
       FeedsUpdater.update_all
 
-      expect(Channel.first.last_updated.strftime("%Y-%m-%d %H:%M")).to eq feed[:last_updated].strftime("%Y-%m-%d %H:%M")
+      expect(Channel.first.last_updated.to_s).to eq feed[:last_updated].to_s
     end
 
     context 'nothing downloaded' do
